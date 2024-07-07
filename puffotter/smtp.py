@@ -30,6 +30,7 @@ def send_email(
         smtp_address: str,
         smtp_password: str,
         smtp_port: int = 587,
+        sender_name: str = "",
 ):
     """
     Sends an HTML email message using SMTP
@@ -50,7 +51,10 @@ def send_email(
 
     msg = MIMEMultipart("alternative")
     msg["subject"] = title
-    msg["From"] = smtp_address
+    if sender_name == "":
+        msg["From"] = smtp_address
+    else:
+        msg["From"] = f"{sender_name} <{smtp_address}>"
     msg["To"] = address
     msg.attach(MIMEText(message, "html"))
 
