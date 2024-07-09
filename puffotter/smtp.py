@@ -55,7 +55,6 @@ def send_email(
         msg["From"] = smtp_address
     else:
         msg["From"] = f"{sender_name} <{smtp_address}>"
-    msg["To"] = address
     msg.attach(MIMEText(message, "html"))
 
     connection.sendmail(smtp_address, address, msg.as_string())
